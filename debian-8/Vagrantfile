@@ -1,9 +1,27 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "debian/jessie64"
-  config.vm.network "public_network"
+  config.vm.network "public_network", bridge: "en0: Ethernet", auto_config: false
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "2048"
   end
+
+  # manual ip
+  config.vm.provision "shell",
+    run: "always",
+    inline: "ifconfig eth1 10.0.0.142 netmask 255.255.255.0 up"
+
+  # delete default gw on eth0
+  config.vm.provision "shell",
+    run: "always",
+    inline: "eval `route -n | awk '{ if ($8 ==\"eth0\" && $2 != \"0.0.0.0\") print \"route del default gw \" $2; }'`"
+
+  config.vm.provision "shell",
+    run: "always",
+    inline: "sudo route add default gw 10.0.0.1"
+
+  config.vm.provision "shell",
+    run: "always",
+    inline: "sudo sh -c \"echo nameserver 10.0.0.111 > /etc/resolv.conf\""
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get install -y git emacs-nox autoconf autoconf-archive libtool build-essential nodejs npm texlive-full python-sphinx openjdk-7-jre-headless shunit2 libmozjs185-dev libicu-dev erlang
