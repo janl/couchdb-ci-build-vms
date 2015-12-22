@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
     sudo apt-key add erlang_solutions.asc
     sudo apt-get update
 
-    sudo apt-get install -y git emacs24-nox autoconf autoconf-archive libtool build-essential nodejs npm texlive-full python-sphinx openjdk-7-jre-headless shunit2 libmozjs185-dev libicu-dev esl-erlang
+    sudo apt-get install -y git emacs24-nox autoconf autoconf-archive libtool build-essential nodejs npm texlive-full python-sphinx openjdk-7-jre-headless shunit2 libmozjs185-dev libicu-dev esl-erlang libcurl4-openssl-dev
     sudo npm install -g npm
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
