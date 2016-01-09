@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
   config.ssh.shell = "sh"
 
   config.vm.provision "shell", inline: <<-SHELL
-    pkg install -y git emacs-nox11 autoconf autoconf-archive libtool gmake node npm texlive-full python py27-sphinx openjdk-jre spidermonkey185 icu erlang
+    pkg install -y git emacs-nox11 autoconf autoconf-archive libtool gmake node npm texlive-full python py27-sphinx openjdk-jre spidermonkey185 icu erlang screen
     npm install -g npm
     echo '[url "git://10.0.0.107/"]' > /home/vagrant/.gitconfig
     echo '  insteadOf = https://git-wip-us.apache.org/repos/' >> /home/vagrant/.gitconfig
